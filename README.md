@@ -45,3 +45,40 @@ public static void Main()
             writer.WriteLine($"ID del thread: {thread.Id}, Hora d'inici: {thread.StartTime}, Prio: {thread.PriorityLevel}");
         }
     }
+
+## Ex4
+
+Start() inicia l'execució del Thread, Join() el fa esperar a que un altre Thread acabi, Sleep() el fa esperar el temps que li diguis i Kill() para el Thread.
+
+Thread es gestiona manualment mentre que Task és automàtic, passa el mateix amb l'execució. Task es fa servir sobretot per operacions async i Thread per controlar directament els fils.
+
+## Ex5
+A)
+static void Main()
+    {
+        for (int i = 1; i <= 5; i++)
+        {
+            Thread thread = new Thread(() =>
+            {
+                Console.WriteLine("Número" + i);
+            });
+            thread.Start();
+        }
+    }
+
+El ordre d'execució és aleatori (encara que és majoritàriament igual perque l'isard va lent) degut a que el sistema és qui decideix on gastar recursos.
+
+B)
+
+static void Main()
+    {
+        for (int i = 5; i >= 1; i--)
+        {
+            Thread thread = new Thread(() =>
+            {
+                Thread.Sleep(i * 200); // Introduïm retard per ordenar inversament
+                Console.WriteLine("Número" + i);
+            });
+            thread.Start();
+        }
+    }
